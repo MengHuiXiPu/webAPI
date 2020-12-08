@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .father {
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        .content {
+            height: 120px;
+            padding: 10px;
+            border: 1px solid red;
+        }
+
+        .commens {
+            padding: 10px;
+            border: 1px solid green;
+        }
+
+        .commens div {
+            padding: 5px 8px;
+            border-bottom: 1px dashed #666;
+        }
+
+        .commens div span {
+            /* border: 1px solid #0094ff; */
+            cursor: pointer;
+            float: right;
+            font-weight: bolder;
+        }
+
+        .add {
+            width: 780px;
+            margin: 0 auto;
+            margin-top: 10px;
+            border: 1px solid blue;
+            padding: 10px;
+            padding-bottom: 60px;
+        }
+
+        textarea {
+            display: block;
+            width: 760px;
+            margin: 0 auto;
+            height: 120px;
+            resize: none;
+        }
+
+        input[type="button"] {
+            float: right;
+            padding: 10px 14px;
+            margin-top: 10px;
+            margin-right: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="father">
+        <div class="content">
+            今天去了一个很神奇的地方，看照片能猜出来是哪里吗？<br />
+            今天去了一个很神奇的地方，看照片能猜出来是哪里吗？
+        </div>
+        <div class="commens" id="commens">
+            <div>评论：</div>
+        </div>
+    </div>
+
+    <div class="add">
+        <textarea id="txtComment"></textarea>
+        <input type="button" value="发表" id="btnOk" />
+    </div>
+</body>
+    <script>
+        initComment();
+        function initComment() {
+            var commentStr = localStorage.getItem('commentData');
+            if (commentStr != null) {
+            var dataList = JSON.parse(commentStr);
+            for (var i = 0 ; i < dataList.length; i++) {
+                makeDiv(dataList[i]);
+            }
+            }
+        }
+        function makeDiv(commentDataStr) {
+            var newDiv = document.createElement('div');
+            var txtNode = document.createTextNode(commentDataStr);
+            console.log(txtNode.nodeValue);
+
+            var newSpan = document.createElement('span');
+            newSpan.innerText = 'X';
+            newSpan.onclick = function () {
+                if (confirm('哥们,你确定要删除这条评论吗?')){
+                    var commentString = this.previousSibling.nodeValue;
+                    deleteCommentData(commentString);
+                    this.parenNode.parentNode.removeChild(this.parentNode);
+                }
+            }
+            newDiv.appendChild(txtNode);
+            newDiv.appendChild(newSpan);
+
+            document.getElementById('commens').appendChild(newDiv);
+            
+            document.getElementById('btnOk').onclick = function () {
+                var commentStr = document.getElementById('txtComment').value;
+                makeDiv(commentStr);
+                saveData(commentStr);
+
+                document.getElementById('txtComment').value = '';
+            }
+
+            function savaData(commentStr) {
+                var arrStr = localStorage.getItem('commentData');
+                if (arrStr == null) {
+                    var dataList = [];
+                }else{
+                var dataList = JSON.parse(arrStr);
+            }
+                
+            }
+
+            dataList.push(commentStr);
+            var arrStr = JSON.stringify(dataList);
+            localStorage.setItem('commentData',arrStr);
+            console.log('保存成功~~!');
+            
+        }
+
+        function deleteCommentData(commonStr) {
+            var commentStr = localStorage.getItem('commentData');
+            if (commentStr != null) {
+                var dataList = JSON.parse(commentStr);
+                for(var i = 0; i < dataList.length; i++) {
+                    if (dataList[i] == commonStr) {
+                        dataList.splice(i,1);
+                        break;
+                    }
+                }
+                var str = JSON.stringify(dataList);
+                localStorage.setItem('commentData',str);
+                console.log('localstorage 数据删除成功!!');
+                
+            }
+        }
+    </script>
+
+</html>

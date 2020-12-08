@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <title></title>
+    <meta charset='UTF-8' />
+</head>
+
+<body>
+    
+    <button id="open">打开open</button>
+    <button id="close">关闭close</button>
+    <script>
+
+        //1.打开窗口
+        document.getElementById('open').onclick = function () {
+            /**
+             * @description: 打开窗口
+             * @param {string} url:网址
+             * @param {string} name:相当于a标签 target  
+             * @param {string} features:新窗口的特征  位置 大小
+             * @param {boolean} replace:true - URL 替换浏览历史中的当前条目。 
+                                        false - URL 在浏览历史中创建新的条目。
+             * @return: 
+             */
+            //  window.open('http://www.baidu.com','_blank');
+            
+            //  window.open('http://www.baidu.com','_blank',{width:500,height:500});
+            window.open('http://www.baidu.com','_blank','top=100,left=500,width=500,height=500');
+        };
+
+
+        //2.关闭窗口
+        document.getElementById('close').onclick = function () {
+            window.close();
+        };
+    </script>
+</body>
+
+</html>

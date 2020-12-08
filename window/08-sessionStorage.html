@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1">存储据</button>
+    <button id="btn2">取储据</button>
+    <button id="btn3">删储据</button>
+    <button id="btn4">清空储据</button>
+
+    <script>
+        /*1.sessionStorage ： 将 数据 存在缓存中 
+            * a.两者语法完全一样，只是存储时间不同
+            * b.sessionStorage存储的数据只要页面一关闭就没有了
+
+          2.语法 ： 
+            添加数据 ：  sessionStorage.setItem('属性名',属性值)
+            获取数据：   sessionStorage.getItem('属性名')
+            删除数据：   sessionStorage.removeItem('属性名')
+            清除数据： 全部删除 sessionStorage.clear()
+
+          3.两者区别  ： 相同点：都是存储数据  不同点：存储时间不同
+            a.localStorage : 永久存储 （存储在硬盘，HP值无限，除非你电脑硬盘损坏或者卸载浏览器）
+            b.sessionStorage:临时存储 （存储在内存，HP值一条命）
+        
+         */
+
+         document.getElementById('btn1').onclick=function(){
+          //  localStorage
+          sessionStorage.setItem('gfName','Linda'); 
+         }
+
+         
+         document.getElementById('btn2').onclick=function(){
+          //  localStorage
+          var v = sessionStorage.getItem('gfName'); // 如果没有数据，返回 null
+          console.log(v);
+         }
+
+         document.getElementById('btn3').onclick=function(){
+          sessionStorage.removeItem('gfName'); 
+         }
+
+
+         document.getElementById('btn4').onclick=function(){
+          sessionStorage.clear();
+         }
+         
+    </script>
+</body>
+</html>

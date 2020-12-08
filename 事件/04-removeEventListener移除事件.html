@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button" value="点我" id="btn2" />
+
+    <script>
+        var btn = document.getElementById('btn2');
+
+        //1.0级dom事件：点语法移除事件 --------------------------
+        btn.onclick = function () {
+            alert('讨厌~~~');
+        }
+
+        btn.onclick = null; // ***********************************
+
+
+
+
+        //  addEventListener : 注册多个同名事件
+        // 2.btn.removeEventListener('事件名 ', 函数); -----------------------------
+        //   注意点： 要想移除2级dom事件的处理函数，事件处理函数必须是【具名函数】
+        function dianwo() {
+            alert('我是伟大的 2级 dom 事件~~~！');
+        };
+
+        document.getElementById('btn2').addEventListener('click', dianwo);
+
+        document.getElementById('btn2').addEventListener('click', function () {
+            alert('今天webapi 最后一天，大家的状态 有点困啊~~~~~');
+
+            // 移出 第一个 2级 dom 事件 *******************************************
+            document.getElementById('btn2').removeEventListener('click',dianwo);
+        });
+
+
+        //3 IE8不支持  - detachEvent(事件名，函数)
+
+    </script>
+</body>
+
+</html>
