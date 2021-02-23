@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>webAPI-scrollTo</title>
+</head>
+
+<body>
+    <span>aaaaaaaaasdfghjhgfdghjkjhg</span>
+    <div class="bod"></div>
+    <button id="btn">回到顶部</button>
+</body>
+
+</html>
+<script>
+
+    const btn = document.getElementById('btn')
+    const sptxt = document.getElementsByTagName('span')[0]
+    btn.onclick = function () {
+        window.scrollTo(0, 0)
+        const sptxtvalue = sptxt.innerHTML
+        let k = sptxtvalue.split('').reverse().join('')
+        sptxt.innerHTML = k
+    }
+
+</script>
+<style>
+    .bod {
+        width: 50px;
+        height: 10000px;
+        background: #0094ff;
+    }
+</style>
